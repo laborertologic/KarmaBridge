@@ -16,15 +16,12 @@ declare module "karmabridge-types" {
     interface AUTHOR {
         id: string;
         firstName: string;
+        middleName: string;
         lastName: string;
+        email: string;
+        verified: boolean;
+        password: string;
         imageUrl?: string;
-    }
-    enum TYPES {
-        "FullTime" = 1,
-        "PartTime" = 2,
-        "Casual" = 3,
-        "Contract" = 4,
-        "SubContract" = 5
     }
     interface JOB {
         refId: string;
@@ -35,10 +32,22 @@ declare module "karmabridge-types" {
         category: CATEGORY;
         locations: LOCATION[];
         author: AUTHOR;
-        type: TYPES;
         createdAt: Date;
     }
+    interface POST {
+        id: number;
+        title: string;
+        subtitle: string;
+        content: string;
+        authorId: number;
+        createdAt: Date;
+        published: Boolean;
+    }
     interface JOBS_RESPONSE {
+        jobs: JOB[];
+        totalRows: number;
+    }
+    interface REGISTRATION_RESPONSE {
         jobs: JOB[];
         totalRows: number;
     }
@@ -52,5 +61,15 @@ declare module "karmabridge-types" {
         accessToken: string;
         refreshToken: string;
         expiresIn: number;
+    }
+    interface ErrorResponse {
+        message: string;
+        code: number;
+    }
+    interface RegistrationResponse {
+        success: boolean;
+        code: number;
+        error: ErrorResponse;
+        data: AUTHOR;
     }
 }

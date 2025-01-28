@@ -29,22 +29,66 @@ model Profile {
   author    User    @relation(fields: [authorId], references: [id])
 }
 
+// Category -> *Jobs ->
+// Full Time
+// Casual
+// Part Time
+// Permanent
+// Vaccation/Temp/Holiday
+
+// Tags -
+// Tags - Post -> Category -> *Posts
+// id
+// name
+// realation ofcource
+// Tags  Post   Tag_Post
+// id    id   tag_id post_id
+
+// relations to begin with
+// Post -> *Comments -> Post
+// Post -> *Likes -> Post
+
+// Comments -> Nested comments right ? ofcourse
+// id
+// authorId
+// content
+// createdAt
+// editedAt
+// likes relation
+// totalLikes
+
+// Likes
+// id
+// authorId
+// for -> post, job post, comment uuid/id
+// createdAt
+// editedAt
+
 model Post {
-  id        Int     @id @unique @default(autoincrement())
-  title     String
-  subtitle  String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  id          Int       @id @unique @default(autoincrement())
+  title       String
+  subtitle    String
+  content     String?
+  published   Boolean   @default(false)
+  author      User?     @relation(fields: [authorId], references: [id])
+  authorId    Int?
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
+  // files could be anything man
+  // totalLikes
+  // totalViews
 }
 
 model Job {
-  id        Int     @id @unique @default(autoincrement())
-  title     String
-  subtitle  String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  id          Int       @id @unique @default(autoincrement())
+  title       String
+  subtitle    String
+  content     String?
+  published   Boolean   @default(false)
+  author      User?     @relation(fields: [authorId], references: [id])
+  authorId    Int?
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
 }
