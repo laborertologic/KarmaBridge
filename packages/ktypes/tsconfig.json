@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "strict": true,
+    "rootDir": "./src",
+    "outDir": "dist",
+    "declaration": true,
+    "typeRoots": ["src/index.ts","node_modules/@types"]
+  },
+  "exclude": ["node_modules/**/*","dist/**/*"],
+  "include": ["src/**/*"],
+}

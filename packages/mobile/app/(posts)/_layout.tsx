@@ -3,7 +3,7 @@ import {useQuery} from "@apollo/client";
 import {FETCH_POSTS} from "@/queries/posts";
 import React from "react";
 import {PostItem} from "@/app/(posts)/components/PostItem";
-import {POST} from "karmabridge-types";
+import {POST} from "karmabridge-types/src";
 
 interface Post {
     title: string;

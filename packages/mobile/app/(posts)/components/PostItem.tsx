@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from "react-native";
-import {POST} from 'karmabridge-types'
+import {POST} from 'karmabridge-types/src'
 import React from "react";
 
 export function PostItem({posts}:{ posts:POST[]}) {

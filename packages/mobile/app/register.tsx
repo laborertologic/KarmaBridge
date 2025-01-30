@@ -9,17 +9,18 @@ interface Inputs {
     lastName: string;
     email: string;
     password: string;
+    confirmPassword: string;
 }
 
 
 export default function RegisterScreen() {
-    const [input, setInput] = useState<Inputs>({email: "", password: "", firstName: "", lastName: ""});
+    const [input, setInput] = useState<Inputs>({email: "", password: "", firstName: "", lastName: "",confirmPassword: ""});
     const [addUser, {data}] = useMutation(REGISTER_USER);
 
-    const handleRegister = (e: GestureResponderEvent) => {
+    const handleRegister = async (e: GestureResponderEvent) => {
         e.preventDefault();
-        addUser({variables: {email: input.email, password: input.password}}).then(r =>
-            console.log(r.data.register));
+        const data = await addUser({variables: {email: input.email, password: input.password}});
+       console.log(data);
     }
 
     return (
@@ -34,7 +35,8 @@ export default function RegisterScreen() {
                                firstName: e,
                                lastName: input.lastName,
                                email: input.email,
-                               password: input.password
+                               password: input.password,
+                               confirmPassword: input.confirmPassword,
                            })}
                            tabIndex={0}
                 />
@@ -43,7 +45,8 @@ export default function RegisterScreen() {
                                firstName: input.firstName,
                                lastName: e,
                                email: input.email,
-                               password: input.password
+                               password: input.password,
+                               confirmPassword: input.confirmPassword,
                            })}
                            value={input.lastName}
                            tabIndex={0}
@@ -53,7 +56,8 @@ export default function RegisterScreen() {
                                lastName: prevState.lastName,
                                firstName: prevState.firstName,
                                email: e,
-                               password: prevState.password
+                               password: prevState.password,
+                               confirmPassword: prevState.confirmPassword,
                            }))}
                            value={input.email} textContentType={"password"}/>
                 <TextInput placeholder={"Password"}
@@ -62,10 +66,21 @@ export default function RegisterScreen() {
                                lastName: prevState.lastName,
                                firstName: prevState.firstName,
                                email: prevState.email,
-                               password: e
+                               password: e,
+                               confirmPassword: prevState.confirmPassword,
                            }))}
                            value={input.password} textContentType={"password"}/>
-                <Button title={"Register"} color={Colors.dark.background} onPress={handleRegister}/>
+                <TextInput placeholder={"Confirm Password"}
+                           secureTextEntry
+                           onChangeText={e => setInput(prevState => ({
+                               lastName: prevState.lastName,
+                               firstName: prevState.firstName,
+                               email: prevState.email,
+                               password: prevState.password,
+                               confirmPassword: e,
+                           }))}
+                           value={input.password} textContentType={"password"}/>
+                <Button title={"Create Your Account"} color={Colors.dark.background} onPress={handleRegister}/>
             </View>
         </View>
     );

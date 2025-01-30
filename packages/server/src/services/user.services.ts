@@ -2,7 +2,7 @@ import { Prisma, User } from "@prisma/client";
 import { client } from "@/prisma.config";
 import { UserDao } from "@/dao/user.dao";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import {} from 'karmabridge-types';
+import { RESPONSE } from "ktypes";
 
 export class UserServices {
   async getUser(email: string): Promise<User | null> {
@@ -16,26 +16,37 @@ export class UserServices {
     return user;
   }
 
-  async addUser(payload: UserDao): Promise<User | null> {
+  async addUser(payload: UserDao): Promise<RESPONSE<UserDao>> {
     {
-      try {
-        const user = client.user.create({
-          data: payload,
-        });
+      const userExist = await this.getUser(payload.email);
+      if (userExist) {
         return {
-          success: true,
-          error: { code: 200, message: "User registered !" },
+          success: false,
+          code: 401,
+          error: {
+            code: 400,
+            message: "Email already exists ! Please login again !",
+          },
         };
-      } catch (e) {
-        if (e instanceof PrismaClientKnownRequestError) {
-          if (e.code === "P2002") {
-            return {
-              success: false,
-              error: { code: 400, message: "Email already exists" },
-            };
-          }
-        }
       }
+      const user = await client.user.create({
+        data: payload,
+      });
+      if (!user) {
+        return {
+          success: false,
+          code: 404,
+          error: {
+            code: 404,
+            message: "Something went wrong ! Please try again !",
+          },
+        };
+      }
+      return {
+        success: true,
+        code: 200,
+        data: user as UserDao,
+      };
     }
   }
 }
