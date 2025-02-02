@@ -1,8 +1,8 @@
 import * as argon2 from "argon2";
 import { client } from "@/prisma.config";
-import * as process from "node:process";
 import { UserServices } from "@/services/user.services";
 import { UserDao } from "@/dao/user.dao";
+import { ARGON_SECRET } from "@/utils/keys";
 
 const userServices = new UserServices();
 
@@ -32,7 +32,7 @@ const loginMutation = async (_, args: any, context: typeof client) => {
 const registerMutation = async (_, args: UserDao, context: typeof client) => {
   const { email, password } = args;
   const hashed = await argon2.hash(password, {
-    secret: Buffer.from(`${process.env.AGRON_SECRET}`),
+    secret: Buffer.from(`${ARGON_SECRET}`),
   });
   if (!hashed) {
     return {

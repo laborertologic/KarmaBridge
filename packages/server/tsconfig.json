@@ -6,11 +6,21 @@
     // "lib": ["ESNext"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/types/*": ["./@types/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/types/*": [
+        "./@types/*"
+      ]
     }
   },
-    // "esModuleInterop": true,
-  "typeRoots": ["./node_modules/@types", "./@types"],
-  "include": ["src", "@types"]
+  // "esModuleInterop": true,
+  "typeRoots": [
+    "./node_modules/@types",
+    "./@types"
+  ],
+  "include": [
+    "src",
+    "@types"
+  ]
 }

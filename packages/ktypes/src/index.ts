@@ -71,10 +71,18 @@ declare module "ktypes" {
         code: number
     }
 
-    interface RESPONSE<T>  {
+    interface RESPONSE<T> {
         success: boolean
         code: number;
         error?: ErrorResponse
         data?: T
+    }
+
+    interface ProcessEnv {
+        GITHUB_AUTH_TOKEN: string;
+        NODE_ENV: 'development' | 'production';
+        PORT?: string;
+        ARGON_SECRET: string;
+        REFRESH_TOKEN_ROTATION: string;
     }
 }

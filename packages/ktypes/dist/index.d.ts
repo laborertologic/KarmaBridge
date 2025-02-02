@@ -68,4 +68,11 @@ declare module "ktypes" {
         error?: ErrorResponse;
         data?: T;
     }
+    interface ProcessEnv {
+        GITHUB_AUTH_TOKEN: string;
+        NODE_ENV: 'development' | 'production';
+        PORT?: string;
+        ARGON_SECRET: string;
+        REFRESH_TOKEN_ROTATION: string;
+    }
 }
