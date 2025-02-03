@@ -1,6 +1,16 @@
-# KarmaBridge Server
+# KarmaBridge
 
-GraphQL side of things.
+Bridging people and services by establishing credibility and accountability.
+
+## Motivation and Milestones
+
+While I definitely want to be engaged in building this app, I want to keep it simple as it is, since it's going to be a
+service portal for local communities, with credibility and accountability in mind, there are basic functionality that I
+would like to complete within the next few months. The vouching system is a great focus of this app.
+
+- [ ] verification and authentication
+- [ ] user profile, rating and vouching system (can I vouch for him as an employer or an employee.)
+- [ ] posts, likes and comments system.
 
 ## Setup
 
@@ -16,27 +26,8 @@ To run:
 bun run dev
 ```
 
-## Ideas
-
-User can either like or comment to a job/news feed post.
-I need to know who liked the post and who commented on that post
-
-job
-id
-
-Authentication and authorization
-user(logged in)
-id
-
-comments
-id
-content
-
-job_comments
-job_id comment_id
-
 ## References
 
 1. [Prisma Initial Migration](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/baseline-your-database-typescript-postgresql)
 2. [Prisma Up and Down Migration](https://www.prisma.io/docs/orm/prisma-migrate/workflows/generating-down-migrations#about-down-migrations)
-3. [Authentication with context value](https://www.apollographql.com/docs/apollo-server/security/authentication)
+   . [Authentication with context value](https://www.apollographql.com/docs/apollo-server/security/authentication)

@@ -4,7 +4,7 @@ import { JwtServices } from "../src/services/jwt.services";
 const service = new JwtServices();
 const email = "bravo@gmail.com";
 
-describe("===JWT UTILITIES===", () => {
+describe("===JWT SPEC===", () => {
   test("====Sign JWT Token with supplied payload ====", async () => {
     expect(await service.signAccessToken(email)).toBeDefined();
   });

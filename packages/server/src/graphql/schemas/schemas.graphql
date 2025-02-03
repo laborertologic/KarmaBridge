@@ -54,8 +54,23 @@ type RegistrationResponse {
     data:User
 }
 
+# AUTH RESPONSE
+type AuthInfo {
+    accessToken:String!
+    refreshToken:String!
+    expiresIn:Int
+}
+
+# LOGIN RESPONSE
+type LoginResponse {
+    success:Boolean!
+    code:Int!
+    error:ErrorResponse
+    data:AuthInfo
+}
+
 type Mutation {
     register(email: String!, password:String!): RegistrationResponse
-    login(email: String!, password:String!): User
+    login(email: String!, password:String!): LoginResponse
     post(title:String!,subtitle:String!,content:String!): Post
 }

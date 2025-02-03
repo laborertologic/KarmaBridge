@@ -10,7 +10,7 @@ import * as crypto from "node:crypto";
 
 let ALGO: string;
 ALGO = "HS256";
-const privateKey = crypto.createSecretKey(JWT_SECRET, "utf-8");
+export const privateKey = crypto.createSecretKey(JWT_SECRET, "utf-8");
 
 export class JwtServices {
   async signAccessToken(email: string): Promise<string> {

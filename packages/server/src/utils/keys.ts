@@ -8,9 +8,7 @@ const JWT_SECRET = process.env["JWT_SECRET"] || "randomsecretman!@###";
 const REFRESH_TOKEN_ROTATION = Number(
   process.env["REFRESH_TOKEN_ROTATION"] || "300000",
 );
-const ACCESS_TOKEN_EXPIRY = Number(
-  process.env["ACCESS_TOKEN_EXPIRY"] || 1000000,
-);
+const ACCESS_TOKEN_EXPIRY = process.env["ACCESS_TOKEN_EXPIRY"] || "1 day";
 const NAME = process.env["NAME"] || "KarmaBridge";
 const ISSUER = process.env["ISSUER"] || "com.karmabridge.au";
 

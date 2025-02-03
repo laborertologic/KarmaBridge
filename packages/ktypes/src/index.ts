@@ -1,88 +1,88 @@
 declare module "ktypes" {
-    interface CATEGORY {
-        id: string;
-        title: string;
-        jobs: [JOB] | null;
-    }
+  interface CATEGORY {
+    id: string;
+    title: string;
+    jobs: [JOB] | null;
+  }
 
-    interface LOCATION {
-        id: number;
-        state: string;
-        city: string;
-        suburb: string;
-        street: string;
-        country: string;
-        PostCode: string;
-    }
+  interface LOCATION {
+    id: number;
+    state: string;
+    city: string;
+    suburb: string;
+    street: string;
+    country: string;
+    PostCode: string;
+  }
 
-    interface AUTHOR {
-        id: string;
-        firstName: string;
-        middleName: string;
-        lastName: string;
-        email: string;
-        verified: boolean;
-        password: string;
-        imageUrl?: string;
-    }
+  interface AUTHOR {
+    id: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    email: string;
+    verified: boolean;
+    password: string;
+    imageUrl?: string;
+  }
 
-    interface JOB {
-        refId: string;
-        title: string;
-        shortDescription: string;
-        longDescription: string;
-        categoryId: number;
-        category: CATEGORY;
-        locations: LOCATION[];
-        author: AUTHOR;
-        createdAt: Date;
-    }
+  interface JOB {
+    refId: string;
+    title: string;
+    shortDescription: string;
+    longDescription: string;
+    categoryId: number;
+    category: CATEGORY;
+    locations: LOCATION[];
+    author: AUTHOR;
+    createdAt: Date;
+  }
 
-    interface POST {
-        id: number;
-        title: string;
-        subtitle: string;
-        content: string;
-        authorId: number;
-        createdAt: Date;
-        published: Boolean
-    }
+  interface POST {
+    id: number;
+    title: string;
+    subtitle: string;
+    content: string;
+    authorId: number;
+    createdAt: Date;
+    published: Boolean;
+  }
 
-    interface JOBS_RESPONSE {
-        jobs: JOB[];
-        totalRows: number;
-    }
+  interface JOBS_RESPONSE {
+    jobs: JOB[];
+    totalRows: number;
+  }
 
-    interface UserInfo {
-        imageUrl?: string;
-        FirstName: string;
-        LastName: string;
-        Email: string;
-    }
+  interface UserInfo {
+    imageUrl?: string;
+    FirstName: string;
+    LastName: string;
+    Email: string;
+  }
 
-    interface AuthInfo {
-        accessToken: string;
-        refreshToken: string;
-        expiresIn: number;
-    }
+  interface AuthInfo {
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
+  }
 
-    interface ErrorResponse {
-        message: string
-        code: number
-    }
+  interface ErrorResponse {
+    message: string;
+    code: number;
+  }
 
-    interface RESPONSE<T> {
-        success: boolean
-        code: number;
-        error?: ErrorResponse
-        data?: T
-    }
+  interface RESPONSE<T> {
+    success: boolean;
+    code: number;
+    error?: ErrorResponse;
+    data?: T;
+  }
 
-    interface ProcessEnv {
-        GITHUB_AUTH_TOKEN: string;
-        NODE_ENV: 'development' | 'production';
-        PORT?: string;
-        ARGON_SECRET: string;
-        REFRESH_TOKEN_ROTATION: string;
-    }
+  interface ProcessEnv {
+    GITHUB_AUTH_TOKEN: string;
+    NODE_ENV: "development" | "production";
+    PORT?: string;
+    ARGON_SECRET: string;
+    REFRESH_TOKEN_ROTATION: string;
+  }
 }
