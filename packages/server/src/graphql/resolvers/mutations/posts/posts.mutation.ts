@@ -1,9 +1,10 @@
 import { client } from "@/prisma.config";
+import { ServerContext } from "@/index";
 
 // @ts-ignore
-const addPostMutation = async (_, args, context: typeof client) => {
+const addPostMutation = async (_, args, context: ServerContext) => {
   const { title, subtitle, content } = args;
-  return context.post.create({
+  return context.client.post.create({
     data: {
       title,
       subtitle,

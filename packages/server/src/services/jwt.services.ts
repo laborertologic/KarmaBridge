@@ -10,6 +10,11 @@ import * as crypto from "node:crypto";
 
 let ALGO: string;
 ALGO = "HS256";
+
+interface VerifiedPayload extends JWTPayload {
+  email: string | unknown;
+}
+
 export const privateKey = crypto.createSecretKey(JWT_SECRET, "utf-8");
 
 export class JwtServices {
@@ -33,8 +38,11 @@ export class JwtServices {
       .sign(privateKey);
   }
 
-  async verifyJwtToken(token: string): Promise<JWTPayload> {
+  async verifyJwtToken(token: string): Promise<VerifiedPayload> {
     const legit = await jose.jwtVerify(token, privateKey);
-    return legit.payload;
+    return {
+      token: legit.payload,
+      email: legit.payload.email,
+    };
   }
 }
