@@ -1,10 +1,10 @@
 import * as argon2 from "argon2";
-import { client } from "@/prisma.config";
 import { UserServices } from "@/services/user.services";
 import { UserDao } from "@/dao/user.dao";
 import { ARGON_SECRET, REFRESH_TOKEN_ROTATION } from "@/utils/keys";
 import { JwtServices } from "@/services/jwt.services";
 import { RESPONSE, AuthInfo } from "ktypes";
+import { ServerContext } from "@/index";
 
 const userServices = new UserServices();
 const jwtServices = new JwtServices();
@@ -13,7 +13,7 @@ const jwtServices = new JwtServices();
 const loginMutation = async (
   _: any,
   args: any,
-  context: typeof client,
+  context: ServerContext,
 ): Promise<RESPONSE<AuthInfo>> => {
   const { email, password } = args;
   const user = await userServices.getUser(email);
@@ -63,7 +63,7 @@ const loginMutation = async (
 };
 
 // @ts-ignore
-const registerMutation = async (_, args: UserDao, context: typeof client) => {
+const registerMutation = async (_, args: UserDao, context: ServerContext) => {
   const { email, password } = args;
   const hashed = await argon2.hash(password, {
     secret: Buffer.from(`${ARGON_SECRET}`),
