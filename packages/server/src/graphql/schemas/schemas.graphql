@@ -1,76 +1,77 @@
 type User {
-    id: ID!
-    firstName: String!
-    middleName: String
-    lastName: String!
-    email:String!
-    password:String!
-    verified:Boolean!
+  id: ID!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  email: String!
+  password: String!
+  verified: Boolean!
 }
 
 type Profile {
-    id: ID!
-    bio:String
-    authorId: Int
+  id: ID!
+  bio: String
+  authorId: Int
 }
 
 type Post {
-    id: ID!
-    title: String!
-    subtitle: String!
-    content: String!
-    published: Boolean
-    authorId:Int
+  id: ID!
+  title: String!
+  subtitle: String!
+  content: String!
+  published: Boolean
+  authorId: Int
 }
 
 type Job {
-    id: ID!
-    title: String!
-    subtitle: String!
-    content: String!
-    published: Boolean
-    authorId:Int
+  id: ID!
+  title: String!
+  subtitle: String!
+  content: String!
+  published: Boolean
+  authorId: Int
 }
 
 type Query {
-    jobs: [Job!]!
-    job(id: ID!): Job!
-    user(id: ID!): User!
-    posts:[Post!]! ,
-    post(id:ID!): Post,
+  jobs: [Job!]!
+  job(id: ID!): Job!
+  user(id: ID!): User!
+  posts: [Post!]!
+  post(id: ID!): Post
 }
 
 # INFO Generic Error Response
 type ErrorResponse {
-    message:String!
-    code: String!
+  message: String!
+  code: String!
 }
 
 # REGISTRATION RESPONSE
 type RegistrationResponse {
-    success:Boolean!
-    code:Int!
-    error:ErrorResponse
-    data:User
+  success: Boolean!
+  code: Int!
+  error: ErrorResponse
+  data: User
 }
 
 # AUTH RESPONSE
 type AuthInfo {
-    accessToken:String!
-    refreshToken:String!
-    expiresIn:Int
+  accessToken: String!
+  refreshToken: String!
+  expiresIn: Int
 }
 
 # LOGIN RESPONSE
 type LoginResponse {
-    success:Boolean!
-    code:Int!
-    error:ErrorResponse
-    data:AuthInfo
+  success: Boolean!
+  code: Int!
+  error: ErrorResponse
+  data: AuthInfo
 }
 
 type Mutation {
-    register(email: String!, password:String!): RegistrationResponse
-    login(email: String!, password:String!): LoginResponse
-    post(title:String!,subtitle:String!,content:String!): Post
+  register(email: String!, password: String!): RegistrationResponse
+  login(email: String!, password: String!): LoginResponse
+  refresh(accessToken: String!): LoginResponse
+  post(title: String!, subtitle: String!, content: String!): Post
 }

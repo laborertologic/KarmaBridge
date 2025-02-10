@@ -84,4 +84,35 @@ const registerMutation = async (_, args: UserDao, context: ServerContext) => {
   }
 };
 
-export { registerMutation, loginMutation };
+const refreshMutation = async (
+  _: any,
+  args: any,
+  _context: ServerContext,
+): Promise<RESPONSE<AuthInfo>> => {
+  const { accessToken } = args;
+  const payload = await jwtServices.verifyJwtToken(accessToken);
+  if (payload && payload.email) {
+    const accessToken = await jwtServices.signAccessToken(
+      payload.email as string,
+    );
+    const refreshToken = await jwtServices.signRefreshToken(
+      payload.email as string,
+    );
+    return {
+      success: true,
+      code: 200,
+      data: {
+        accessToken,
+        refreshToken,
+        expiresIn: REFRESH_TOKEN_ROTATION,
+      },
+    };
+  }
+  return {
+    success: false,
+    error: { code: 401, message: "Invalid access token provided !." },
+    code: 401,
+  };
+};
+
+export { registerMutation, loginMutation, refreshMutation };
